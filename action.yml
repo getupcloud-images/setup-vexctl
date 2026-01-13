@@ -19,6 +19,11 @@ inputs:
     description: 'cosign release version to be installed'
     required: false
     default: 'v3.0.2'
+  install-cosign:
+    description: 'Either to install cosign binary or not'
+    type: boolean
+    required: false
+    default: true
   install-dir:
     description: 'Where to install the vexctl binary'
     required: false
@@ -31,6 +36,7 @@ runs:
   using: "composite"
   steps:
     - uses: sigstore/cosign-installer@faadad0cce49287aee09b3a48701e75088a2c6ad # v4.0.0
+      if: ${{ inputs.install-cosign }}
       with:
         cosign-release: ${{ inputs.cosign-release }}      
         install-dir: ${{ inputs.install-dir }}
